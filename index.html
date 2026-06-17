@@ -1,155 +1,362 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Account Alert</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureBank - Online Banking Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .training-banner {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 5px 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: #003d82;
+            color: white;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .logo-icon {
+            width: 26px;
+            height: 26px;
+            background: white;
+            border-radius: 50%;
+            margin-right: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #003d82;
+            font-size: 13px;
+        }
+        .header-links {
+            font-size: 12px;
+        }
+        .header-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            overflow-y: auto;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 380px;
+        }
+        .security-alert {
+            background: #fff3cd;
+            border-left: 3px solid #ffc107;
+            padding: 8px;
+            margin-bottom: 12px;
+            border-radius: 3px;
+        }
+        .security-alert-title {
+            color: #856404;
+            font-weight: bold;
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+            font-size: 11px;
+        }
+        .security-alert-text {
+            color: #856404;
+            font-size: 10px;
+            line-height: 1.4;
+        }
+        .login-title {
+            color: #003d82;
+            font-size: 18px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        .login-subtitle {
+            color: #666;
+            font-size: 11px;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        label {
+            display: block;
+            margin-bottom: 4px;
+            color: #333;
+            font-weight: 500;
+            font-size: 11px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 9px 11px;
+            border: 1.5px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #003d82;
+        }
+        .password-wrapper {
+            position: relative;
+        }
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 11px;
+            padding: 4px 6px;
+            color: #666;
+            user-select: none;
+            font-weight: 500;
+        }
+        .password-toggle:hover {
+            color: #003d82;
+        }
+        input[type="password"],
+        input[type="text"].password-input {
+            padding-right: 38px;
+        }
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 11px;
+            color: #666;
+        }
+        .remember-me input {
+            margin-right: 5px;
+        }
+        .login-button {
+            width: 100%;
+            padding: 11px;
+            background: #003d82;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .login-button:hover {
+            background: #002a5c;
+        }
+        .security-info {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            color: #28a745;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        .footer-links {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 10px;
+        }
+        .footer-links a {
+            color: #003d82;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 10px 18px;
+            text-align: center;
+            color: #666;
+            font-size: 9px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .footer p {
+            margin: 2px 0;
+        }
+        .footer a {
+            color: #666;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        
+        @media (max-height: 750px) {
+            .training-banner {
+                padding: 4px 10px;
+                font-size: 9px;
+            }
+            .header {
+                padding: 7px 18px;
+            }
+            .login-container {
+                padding: 18px;
+            }
+            .security-alert {
+                padding: 7px;
+                margin-bottom: 10px;
+            }
+            .login-title {
+                font-size: 16px;
+                margin-bottom: 3px;
+            }
+            .login-subtitle {
+                margin-bottom: 12px;
+            }
+            .form-group {
+                margin-bottom: 10px;
+            }
+            input[type="text"],
+            input[type="password"] {
+                padding: 8px 10px;
+            }
+            .footer {
+                padding: 7px 12px;
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .header-links {
+                display: none;
+            }
+            .login-container {
+                padding: 18px 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-<!-- Centering wrapper -->
-<table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f5f5f5;">
-    <tr>
-        <td align="center" style="padding: 20px 0;">
-            <!-- Main content table - centered -->
-            <table border="0" cellpadding="0" cellspacing="0" style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; max-width: 600px; background-color: rgb(255, 255, 255); margin: 0 auto;">
-                <tbody>
-                    <tr>
-                        <td style="margin: 0px;">
-                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                <tbody>
-                                    <tr>
-                                        <td align="left" style="margin: 0px;"><img height="32" src="https://ci3.googleusercontent.com/proxy/EURRrDHt1LcCbHcRdDtMHOQPPMHe5FkDsMAHs66gxAIYzYD38Abpa1Fmy-ACuq2V1tI8GZdWA4FLsXjKM4iAD-CixwUocANswARkdK1ttXK-T1DDSfiUplKFys37dkM=s0-d-e1-ft#https://www.gstatic.com/accountalerts/email/googlelogo_color_188x64dp.png" style="display: block; width: 92px; min-height: 32px;" width="92" /></td>
-                                        <td align="right" style="margin: 0px;"><img height="32" src="https://ci6.googleusercontent.com/proxy/w8ACgsIEmhjGKodu731Z-VOiYfmXsRM4zd6F_w4_cKQ1JPXF_6Y_hEPR_iJKee33yGZ8zR6o_Q08vuYMKmetfyoGNtMpt1d5CU6z3xA=s0-d-e1-ft#https://www.gstatic.com/accountalerts/email/keyhole.png" style="display: block; width: 32px; min-height: 32px;" width="32" /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr height="16">
-                    </tr>
-                    <tr>
-                        <td style="margin: 0px;">
-                            <table bgcolor="#4184F3" border="0" cellpadding="0" cellspacing="0" style="min-width: 332px; max-width: 600px; border-width: 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-left-style: solid; border-top-color: rgb(224, 224, 224); border-right-color: rgb(224, 224, 224); border-left-color: rgb(224, 224, 224); border-top-left-radius: 3px; border-top-right-radius: 3px;" width="100%">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="3" height="72px" style="margin: 0px;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="margin: 0px;" width="32px">&nbsp;</td>
-                                        <td style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; margin: 0px; font-size: 24px; color: rgb(255, 255, 255); line-height: 1.25;">New sign-in from Chrome OS</td>
-                                        <td style="margin: 0px;" width="32px">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" height="18px" style="margin: 0px;">&nbsp;</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="margin: 0px;">
-                            <table bgcolor="#FAFAFA" border="0" cellpadding="0" cellspacing="0" style="min-width: 332px; max-width: 600px; border-width: 0px 1px 1px; border-right-style: solid; border-left-style: solid; border-right-color: rgb(240, 240, 240); border-left-color: rgb(240, 240, 240); border-bottom-style: solid; border-bottom-color: rgb(192, 192, 192); border-bottom-left-radius: 3px; border-bottom-right-radius: 3px;" width="100%">
-                                <tbody>
-                                    <tr height="16px">
-                                        <td rowspan="3" style="margin: 0px;" width="32px">&nbsp;</td>
-                                        <td style="margin: 0px;">&nbsp;</td>
-                                        <td rowspan="3" style="margin: 0px;" width="32px">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="margin: 0px;">
-                                            <table border="0" cellpadding="0" cellspacing="0" style="min-width: 300px;">
-                                                <tbody>
-                                                    <tr>
-                                                        <td style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; margin: 0px; font-size: 13px; color: rgb(32, 32, 32); line-height: 1.5;">Hi {{.FirstName}},</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; margin: 0px; font-size: 13px; color: rgb(32, 32, 32); line-height: 1.5;">Your Google Account&nbsp;<span style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; line-height: 19.2px; background-color: rgb(250, 250, 250);">{{.Email}}&nbsp;</span>was just used to sign in on&nbsp;<span style="white-space: nowrap;">Chrome OS</span>.
-                                                            <table border="0" cellpadding="0" cellspacing="0" style="margin-top: 48px; margin-bottom: 48px;">
-                                                                <tbody>
-                                                                    <tr valign="middle">
-                                                                        <td style="font-family: arial, sans-serif; margin: 0px;" width="32px">&nbsp;</td>
-                                                                        <td align="center" style="font-family: arial, sans-serif; margin: 0px;"><img height="48px" src="https://ci6.googleusercontent.com/proxy/_ehxLExCa2FPeTKuNVAgMUxyx7YBxMq8-qickdiS6h0GI2UChu_KZURQgNm3-OuvpRjUg26eTgHNny2H1gs6Pzzy81YKOLOVHegzDqMfEMQVAWTuszLuOL68hqTN=s0-d-e1-ft#https://www.gstatic.com/accountalerts/email/anonymous_profile_photo.png" style="width: 48px; min-height: 48px; display: block; border-radius: 50%;" width="48px" /></td>
-                                                                        <td style="font-family: arial, sans-serif; margin: 0px;" width="16px">&nbsp;</td>
-                                                                        <td style="margin: 0px;"><span style="line-height: 19.2px;">{{.FirstName}} {{.LastName}}</span><br style="font-family: arial, sans-serif; line-height: 19.2px; background-color: rgb(250, 250, 250);" />
-                                                                        <span style="line-height: 1.2;">{{.Email}}</span></td>
-                                                                    </tr>
-                                                                    <tr valign="middle">
-                                                                        <td height="24px" style="font-family: arial, sans-serif; margin: 0px;" width="32px">&nbsp;</td>
-                                                                        <td align="center" height="24px" style="font-family: arial, sans-serif; margin: 0px;"><img height="10px" src="https://ci4.googleusercontent.com/proxy/3v5djkrQw0eYYuEXwiOUoxXYc3R6bFSVEFNL0C3YbDgAYCp7sUIL4fxyDZ8RADuKX3gZ4_z6bAmrACIqNYpHa95AfUrSskjfkEf4nDXRH7A=s0-d-e1-ft#https://www.gstatic.com/accountalerts/email/down_arrow.png" style="width: 4px; min-height: 10px; display: block;" width="4px" /></td>
-                                                                    </tr>
-                                                                    <tr valign="top">
-                                                                        <td style="font-family: arial, sans-serif; margin: 0px;" width="32px">&nbsp;</td>
-                                                                        <td align="center" style="font-family: arial, sans-serif; margin: 0px;"><img height="48px" src="https://ci3.googleusercontent.com/proxy/MeVln3V_GSBpyT0OD_Jp5n_RRCL5UwlTk8OLiq6akdHukWHGvlg6rK20Jo4Jq2MF02f5I45hJU0lcdGgQ4oPXJRDG0NFNlMKRsKzde27ogalxsptrA_ksZiVXUbv-FOPwFEQ=s0-d-e1-ft#https://www.gstatic.com/accountalerts/devices/chrome_device_wallpaper_big.png" style="width: 48px; min-height: 48px; display: block;" width="48px" /></td>
-                                                                        <td style="font-family: arial, sans-serif; margin: 0px;" width="16px">&nbsp;</td>
-                                                                        <td style="font-family: arial, sans-serif; margin: 0px; line-height: 1.2;"><span style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; font-size: 16px;">Chrome OS</span><br />
-                                                                        <span style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; color: rgb(114, 114, 114);">Tuesday, 30 August 2016 12:54 (British Summer Time)<br />
-                                                                        Leeds, UK*</span></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                            <b>Don't recognise this activity? If you don't recognise this device click the following place</b>
-
-                                                            <p><a href="{{.URL}}">Click here</a></p>
-
-                                                            <p><a href="{{.URL}}">Review your recently used devices here</a></p>
-                                                            <br />
-                                                            <br />
-                                                            Why are we sending this? We take security very seriously and we want to keep you in the loop on important actions in your account.<br />
-                                                            We were unable to determine whether you have used this browser or device with your account before. This can happen when you sign in for the first time on a new computer, phone or browser, when you use your browser's incognito or private browsing mode or clear your cookies or when somebody else is accessing your account.</td>
-                                                    </tr>
-                                                    <tr height="32px">
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; margin: 0px; font-size: 13px; color: rgb(32, 32, 32); line-height: 1.5;">Best,<br />
-                                                        The Google Accounts team</td>
-                                                    </tr>
-                                                    <tr height="16px">
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="margin: 0px;">
-                                                            <table style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; font-size: 12px; color: rgb(185, 185, 185); line-height: 1.5;">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td style="font-family: arial, sans-serif; margin: 0px;">*The location is approximate and determined by the IP address it was coming from.</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="font-family: arial, sans-serif; margin: 0px;">This email can't receive replies. To give us feedback on this alert,&nbsp;<a href="{{.URL}}" style="color: rgb(66, 133, 244); text-decoration: none;" target="_blank">click here</a>.<br />
-                                                                        For more information, visit the&nbsp;<a href="{{.URL}}" style="color: rgb(66, 133, 244); text-decoration: none;" target="_blank">Google Accounts Help Centre</a>.</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr height="32px">
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr height="16">
-                    </tr>
-                    <tr>
-                        <td style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; margin: 0px; max-width: 600px; font-size: 10px; color: rgb(188, 188, 188); line-height: 1.5;">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td style="margin: 0px;">
-                            <table style="font-family: Roboto-Regular, Helvetica, Arial, sans-serif; font-size: 10px; color: rgb(102, 102, 102); line-height: 18px; padding-bottom: 10px;">
-                                <tbody>
-                                    <tr>
-                                        <td style="font-family: arial, sans-serif; margin: 0px;">You have received this mandatory email service announcement to update you about important changes to your Google product or account.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-</table>
-
-{{.Tracker}}
+    <div class="training-banner">
+        ⚠️ SECURITY AWARENESS TRAINING - This is a simulated phishing exercise for educational purposes ⚠️
+    </div>
+    
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon">🏦</div>
+            SecureBank
+        </div>
+        <div class="header-links">
+            <a href="#">Personal</a>
+            <a href="#">Business</a>
+            <a href="#">Help</a>
+        </div>
+    </div>
+    
+    <div class="main-container">
+        <div class="login-container">
+            <div class="security-alert">
+                <div class="security-alert-title">
+                    🔒 Security Verification Required
+                </div>
+                <div class="security-alert-text">
+                    We detected unusual activity on your account. Please verify your identity to prevent account suspension.
+                </div>
+            </div>
+            
+            <h1 class="login-title">Secure Login</h1>
+            <p class="login-subtitle">Enter your credentials to verify your account</p>
+            
+            <form action="{{.URL}}" method="POST">
+                <div class="form-group">
+                    <label for="username">Username or Account Number</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" required autofocus>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Enter password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="Toggle password visibility">
+                            <span id="toggleIcon">Show</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember this device</label>
+                </div>
+                
+                <button type="submit" class="login-button">Verify & Sign In</button>
+                
+                <div class="security-info">
+                    <div class="security-badge">
+                        🔐 256-bit SSL Encrypted Connection
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#">Forgot Username?</a>
+                    <a href="#">Forgot Password?</a>
+                    <a href="#">Enroll Now</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2025 SecureBank. Member FDIC. Equal Housing Lender.</p>
+        <p>
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Security Center</a> |
+            <a href="#">Terms of Use</a>
+        </p>
+    </div>
+    
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.textContent = 'Show';
+            }
+        }
+    </script>
 </body>
 </html>
